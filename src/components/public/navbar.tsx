@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Gamepad2, CalendarDays } from 'lucide-react'
-import { SITE_NAME } from '@/lib/constants'
+import { Menu, X, CalendarDays } from 'lucide-react'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -27,15 +27,20 @@ export function Navbar() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-gray-100 shadow-sm glass-nav">
       <nav className="relative flex w-full max-w-full items-center justify-between px-4 py-3 md:px-8 md:py-4">
+
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-80"
+          className="flex shrink-0 items-center transition-opacity hover:opacity-80"
         >
-          <div className="gradient-primary flex size-10 items-center justify-center rounded-full text-primary-foreground shadow-ambient">
-            <Gamepad2 className="size-5" />
-          </div>
-          <span className="font-display text-lg font-black tracking-tight">{SITE_NAME}</span>
+          <Image
+            src="/branding/smile-factory-logo.png"
+            alt="The Smile Factory"
+            width={64}
+            height={64}
+            className="h-12 w-auto md:h-16 object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop: centered navigation */}
@@ -76,7 +81,7 @@ export function Navbar() {
             className="gradient-primary flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold text-primary-foreground shadow-md transition-all hover:opacity-90 active:scale-95 md:px-6 md:text-sm"
           >
             <CalendarDays className="size-4 shrink-0" />
-            <span className="hidden min-[400px]:inline">Book a Party</span>
+            <span className="hidden min-[400px]:inline">Book</span>
             <span className="min-[400px]:hidden">Book</span>
           </Link>
 
@@ -92,7 +97,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile: slides down from under the bar */}
+      {/* Mobile menu */}
       <div
         className={`absolute left-0 top-full w-full border-b border-zinc-200 bg-white/95 shadow-xl backdrop-blur-md transition-all duration-300 ease-out lg:hidden ${
           mobileOpen
